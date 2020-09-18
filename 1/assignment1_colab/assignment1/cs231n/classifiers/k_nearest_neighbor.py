@@ -64,7 +64,6 @@ class KNearestNeighbor(object):
         num_test = X.shape[0]
         num_train = self.X_train.shape[0]
         dists = np.zeros((num_test, num_train))
-
         for i in range(num_test):
             for j in range(num_train):
                 # #####################################################################
@@ -104,7 +103,6 @@ class KNearestNeighbor(object):
             # #######################################################################
 
             dists[i, :] = np.sum(np.abs(self.X_train - X[i, :]))
-
         return dists
 
     def compute_distances_no_loops(self, X):
@@ -133,9 +131,10 @@ class KNearestNeighbor(object):
         # #########################################################################
         # #                         END OF YOUR CODE                              #
         # #########################################################################
-
+        # transpose() đổi vị trí đối xứng
         dists = np.sqrt(np.square(self.X_train[:, None] - X).sum(axis=2)).transpose()
-
+        # print(np.sqrt(np.square(self.X_train[:, None] - X).sum(axis=2)))
+        # print('>>>>',np.sqrt(np.square(self.X_train[:, None] - X).sum(axis=2)).transpose())
         return dists
 
     def predict_labels(self, dists, k=1):
